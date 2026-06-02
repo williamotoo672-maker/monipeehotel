@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes">
+  <title>Monipee Hotel | Ultra-Luxury Estate • Obuasi</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: #2c2418;
+      overflow-x: hidden;
+      background: #FDF9F2;
+    }
+
+    :root {
+      --cream-light: #FDF9F2;
+      --cream: #F5EFE0;
+      --gold-matte: #C6A43F;
+      --gold-deep: #A8892E;
+      --charcoal: #2A2418;
+    }
+
+    h1, h2, h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+    }
+
+    .logo-text {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #FDF9F2;
+      letter-spacing: 2px;
+      font-style: italic;
+    }
+    .logo-text span {
+      color: #C6A43F;
+      font-weight: 800;
+      font-style: normal;
+    }
+
+    ::-webkit-scrollbar { width: 3px; }
+    ::-webkit-scrollbar-track { background: #2A2418; }
+    ::-webkit-scrollbar-thumb { background: #C6A43F; border-radius: 4px; }
+
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      padding: 0.8rem 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
+      background: rgba(0,0,0,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(198, 164, 63, 0.3);
+    }
+    
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      cursor: pointer;
+    }
+    
+    .nav-links { display: none; }
+    
+    .hamburger {
+      display: flex;
+      flex-direction: column;
+      cursor: pointer;
+      gap: 4px;
+      z-index: 1001;
+    }
+    .hamburger span {
+      width: 24px;
+      height: 2px;
+      background: #FDF9F2;
+      transition: 0.3s;
+    }
+    .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); background: #C6A43F; }
+    .hamburger.active span:nth-child(2) { opacity: 0; }
+    .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); background: #C6A43F; }
+
+    .mobile-menu {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 75%;
+      max-width: 300px;
+      height: 100vh;
+      background: #0D0A07;
+      z-index: 999;
+      padding: 6rem 1.8rem;
+      transition: right 0.4s ease;
+      border-left: 1px solid rgba(198, 164, 63, 0.4);
+    }
+    .mobile-menu.active { right: 0; }
+    .mobile-menu a {
+      display: block;
+      color: #FDF9F2;
+      text-decoration: none;
+      font-size: 1rem;
+      padding: 0.8rem 0;
+      border-bottom: 1px solid rgba(198, 164, 63, 0.2);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-weight: 500;
+    }
+    .mobile-menu a:hover { color: #C6A43F; padding-left: 8px; }
+    .close-menu {
+      position: absolute;
+      top: 1.2rem;
+      right: 1.2rem;
+      font-size: 1.4rem;
+      cursor: pointer;
+      color: #C6A43F;
+    }
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.4);
+      backdrop-filter: blur(3px);
+      z-index: 998;
+      display: none;
+    }
+    .overlay.active { display: block; }
+
+    .hero {
+      height: 100vh;
+      min-height: 600px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      padding: 0 5%;
+      background-image: url('images/background.png');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 0;
+    }
+    .hero-content {
+      max-width: 90%;
+      z-index: 2;
+      position: relative;
+    }
+    .hero-content h1 { 
+      font-size: 2.8rem; 
+      margin-bottom: 0.8rem; 
+      color: #FFFFFF; 
+      font-family: 'Playfair Display', serif; 
+      font-weight: 700;
+    }
+    .hero-content p { 
+      font-size: 0.85rem; 
+      max-width: 500px; 
+      margin: 0 auto; 
+      opacity: 0.85; 
+      line-height: 1.5; 
+      color: #F0EADD;
+    }
+    .divider { width: 50px; height: 2px; background: #C6A43F; margin: 1rem auto; }
+    .btn-primary {
+      background: #C6A43F;
+      border: none;
+      padding: 0.7rem 1.6rem;
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 2.5px;
+      color: #0D0A07;
+      cursor: pointer;
+      border-radius: 40px;
+      transition: 0.2s;
+    }
+    .btn-primary:hover { background: #E0BA55; transform: translateY(-2px); }
+
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.active { opacity: 1; transform: translateY(0); }
+
+    section { padding: 3rem 5%; background: #FDF9F2; }
+    .section-title { text-align: center; font-size: 2rem; margin-bottom: 0.3rem; color: #2c2418; }
+    .section-sub { text-align: center; color: #C6A43F; letter-spacing: 3px; font-size: 0.55rem; margin-bottom: 1.5rem; text-transform: uppercase; }
+
+    /* GALLERY */
+    .gallery-swiper { width: 100%; border-radius: 20px; overflow: hidden; }
+    .gallery-slide { width: 100%; height: 280px; border-radius: 20px; background: #E8DDCE; display: flex; align-items: center; justify-content: center; color: #7a684c; font-size: 0.8rem; overflow: hidden; }
+    .gallery-slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .swiper-pagination-bullet-active { background: #C6A43F; }
+
+    /* POOL */
+    .pool-highlight { background: #F5EFE0; border-radius: 24px; margin: 0 auto; overflow: hidden; width: 100%; }
+    .pool-image { width: 100%; min-height: 280px; background: #E8DDCE; display: flex; align-items: center; justify-content: center; color: #7a684c; font-size: 0.8rem; overflow: hidden; }
+    .pool-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    /* EVENTS - GRID COLLAGE WITH 3 IMAGES */
+    .events-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    .event-grid-item {
+      position: relative;
+      border-radius: 24px;
+      overflow: hidden;
+      background: #E8DDCE;
+      min-height: 240px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #7a684c;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+    .event-grid-item:hover {
+      transform: translateY(-5px);
+    }
+    .event-grid-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+    .event-grid-item:hover img {
+      transform: scale(1.03);
+    }
+    .event-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+      padding: 1.5rem;
+      text-align: center;
+    }
+    .event-overlay span {
+      color: #FDF9F2;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+    .events-content {
+      text-align: center;
+      background: #F5EFE0;
+      padding: 1.8rem;
+      border-radius: 24px;
+    }
+    .events-content h3 { font-size: 1.6rem; color: #C6A43F; margin-bottom: 0.8rem; }
+    .events-content p { font-size: 0.8rem; line-height: 1.5; color: #5c4e38; margin-bottom: 1rem; }
+    .events-features {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+      margin: 1.2rem 0;
+    }
+    .event-feature { display: flex; flex-direction: column; align-items: center; gap: 0.3rem; }
+    .event-feature i { font-size: 1.3rem; color: #C6A43F; }
+    .event-feature span { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 1px; color: #5c4e38; }
+    .btn-event {
+      background: transparent; border: 1.5px solid #C6A43F; padding: 0.6rem 1.5rem; font-size: 0.6rem;
+      font-weight: 600; letter-spacing: 1.5px; color: #C6A43F; cursor: pointer; border-radius: 40px;
+      transition: all 0.3s ease;
+    }
+    .btn-event:hover { background: #C6A43F; color: #FDF9F2; }
+
+    /* ROOMS */
+    .rooms-stack { display: flex; flex-direction: column; gap: 2rem; max-width: 100%; margin: 0 auto; }
+    .luxury-room-card {
+      background: #FCF8F0; border-radius: 28px; overflow: hidden; box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+      transition: all 0.3s ease; border: 1px solid #E8DDCE;
+    }
+    .luxury-room-card:hover { transform: translateY(-4px); border-color: #C6A43F; }
+    .room-stack-image { width: 100%; height: 280px; overflow: hidden; background: #E8DDCE; display: flex; align-items: center; justify-content: center; color: #7a684c; font-size: 0.8rem; }
+    .room-stack-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; display: block; }
+    .room-stack-details { padding: 1.5rem; text-align: left; }
+    .room-stack-title { font-size: 1.8rem; font-weight: 600; color: #2c2418; margin-bottom: 0.5rem; font-family: 'Cormorant Garamond', serif; }
+    .room-stack-specs { font-size: 0.85rem; color: #7a684c; margin-bottom: 0.75rem; }
+    .room-stack-specs i { color: #C6A43F; width: 20px; margin-right: 4px; }
+    .room-stack-feature { font-size: 0.8rem; color: #5c4e38; margin-bottom: 1rem; font-style: italic; }
+    .room-stack-price { font-size: 1.5rem; font-weight: 700; color: #C6A43F; margin: 1rem 0 1.2rem; }
+    .room-stack-price span { font-size: 0.8rem; font-weight: 400; color: #7a684c; }
+    .btn-stack-book {
+      background: transparent; border: 1.5px solid #C6A43F; padding: 0.7rem 1.8rem; font-size: 0.65rem;
+      font-weight: 600; letter-spacing: 2px; color: #C6A43F; cursor: pointer; border-radius: 40px;
+      display: inline-block; transition: all 0.3s ease;
+    }
+    .btn-stack-book:hover { background: #C6A43F; color: #FDF9F2; transform: translateX(5px); }
+
+    /* AMENITIES - LARGER SINGLE SLIDER */
+    .amenities-single-slider {
+      width: 100%;
+      max-width: 600px;
+      margin: 0 auto;
+      overflow: hidden;
+      padding: 20px 0;
+    }
+    .amenities-single-slider .swiper-slide {
+      display: flex;
+      justify-content: center;
+    }
+    .polaroid-single {
+      background: #FEFCF8;
+      padding: 20px 20px 30px 20px;
+      border-radius: 20px;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+      width: 100%;
+      max-width: 400px;
+      margin: 0 auto;
+      transition: transform 0.3s ease;
+    }
+    .polaroid-single:hover { transform: scale(1.02); }
+    .polaroid-single-img {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      overflow: hidden;
+      border-radius: 16px;
+      margin-bottom: 20px;
+      background: #E8DDCE;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #7a684c;
+      font-size: 0.9rem;
+    }
+    .polaroid-single-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .polaroid-single-caption { text-align: center; }
+    .polaroid-single-caption h4 { font-size: 1.6rem; margin-bottom: 8px; font-family: 'Cormorant Garamond', serif; color: #2c2418; }
+    .polaroid-single-caption p { font-size: 0.7rem; letter-spacing: 2px; color: #C6A43F; text-transform: uppercase; }
+    .amenities-single-slider .swiper-button-next,
+    .amenities-single-slider .swiper-button-prev {
+      color: #C6A43F;
+      background: rgba(0,0,0,0.05);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+    }
+    .amenities-single-slider .swiper-button-next:after,
+    .amenities-single-slider .swiper-button-prev:after {
+      font-size: 1.2rem;
+    }
+    .amenities-single-slider .swiper-pagination-bullet {
+      background: #C6A43F;
+    }
+
+    /* REVIEW */
+    .review-card { max-width: 90%; margin: 1rem auto; background: #F5EFE0; padding: 1.2rem; text-align: center; border-radius: 24px; }
+    .stars { letter-spacing: 3px; font-size: 0.8rem; margin-bottom: 0.5rem; color: #C6A43F; }
+    .review-text { font-size: 0.8rem; line-height: 1.5; }
+
+    /* LOCATION */
+    .location-box { display: flex; flex-direction: column; gap: 0.8rem; background: #F5EFE0; border-radius: 24px; overflow: hidden; width: 100%; }
+    .map-image { width: 100%; min-height: 240px; background: #E8DDCE; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; color: #7a684c; overflow: hidden; }
+    .map-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .address { padding: 1.2rem; text-align: center; }
+    .address h3 { font-size: 1.2rem; }
+    .address p { font-size: 0.75rem; margin: 0.5rem 0; }
+    .btn-outline {
+      background: transparent; border: 1.5px solid #C6A43F; padding: 0.5rem 1.2rem; font-size: 0.55rem;
+      font-weight: 600; letter-spacing: 1.5px; color: #C6A43F; border-radius: 40px;
+    }
+
+    /* MODALS */
+    .booking-modal, .event-modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.85);
+      backdrop-filter: blur(8px);
+      z-index: 2000;
+      justify-content: center;
+      align-items: center;
+    }
+    .booking-modal.active, .event-modal.active { display: flex; }
+    .modal-content {
+      max-width: 90%; width: 90%; max-height: 85vh; background: #FDF9F2; border-radius: 24px; border: 1px solid #C6A43F; overflow-y: auto;
+    }
+    .modal-header { padding: 0.8rem; text-align: center; border-bottom: 1px solid #E8DDCE; position: relative; }
+    .close-modal {
+      position: absolute; top: 0.5rem; right: 1rem; font-size: 1.4rem; cursor: pointer; color: #C6A43F;
+    }
+    .booking-form, .event-form { padding: 1rem; }
+    .form-section { margin-bottom: 1rem; padding-bottom: 0.8rem; border-bottom: 1px solid #E8DDCE; }
+    .form-section-title { font-size: 0.9rem; margin-bottom: 0.6rem; color: #C6A43F; }
+    .form-grid { display: flex; flex-direction: column; gap: 0.6rem; }
+    .form-group label { font-size: 0.55rem; text-transform: uppercase; color: #7a684c; display: block; margin-bottom: 0.2rem; }
+    .form-group input, .form-group select, .form-group textarea {
+      width: 100%; background: #FCF8F0; border: 1px solid #E8DDCE; border-radius: 14px; padding: 0.6rem; font-size: 0.75rem;
+      font-family: 'Inter', sans-serif;
+    }
+    .booking-summary, .event-summary { background: #F5EFE0; border-radius: 16px; padding: 0.6rem; text-align: center; margin-bottom: 0.8rem; font-size: 0.7rem; }
+    .submit-btn {
+      background: #C6A43F; border: none; padding: 0.7rem; font-size: 0.65rem; font-weight: 600; letter-spacing: 2px;
+      color: #0D0A07; border-radius: 40px; width: 100%;
+    }
+
+    footer { background: #0D0A07; padding: 1.5rem 5%; text-align: center; color: #B8AA8C; }
+    .footer-logo { font-size: 1rem; margin-bottom: 0.3rem; font-family: 'Playfair Display', serif; font-weight: 700; color: #FDF9F2; letter-spacing: 1px; font-style: italic; }
+    .footer-logo span { color: #C6A43F; font-style: normal; }
+    .socials i { font-size: 0.9rem; margin: 0 8px; color: #C6A43F; }
+
+    @media (min-width: 768px) {
+      .hero-content h1 { font-size: 4rem; }
+      .section-title { font-size: 2.5rem; }
+      .rooms-stack { gap: 2.5rem; }
+      .room-stack-image { height: 380px; }
+      .form-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.8rem; }
+      .events-grid { grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+      .event-grid-item { min-height: 280px; }
+      .pool-image { min-height: 400px; }
+      .map-image { min-height: 320px; }
+      .gallery-slide { height: 400px; }
+      .amenities-single-slider { max-width: 500px; }
+      .polaroid-single { max-width: 450px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="logo-container"><div class="logo-text">MONIPEE <span>HOTEL</span></div></div>
+  <div class="hamburger" id="hamburgerBtn"><span></span><span></span><span></span></div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <div class="close-menu" id="closeMenu"><i class="fas fa-times"></i></div>
+  <a href="#home">HOME</a>
+  <a href="#gallery">GALLERY</a>
+  <a href="#pool">THE POOL</a>
+  <a href="#events">EVENTS</a>
+  <a href="#rooms">ROOMS</a>
+  <a href="#amenities">AMENITIES</a>
+  <a href="#review">TESTIMONIAL</a>
+  <a href="#location">LOCATION</a>
+  <a href="#" id="mobileOpenModalBtn">RESERVE</a>
+</div>
+<div class="overlay" id="overlay"></div>
+
+<div id="home" class="hero">
+  <div class="hero-content reveal">
+    <h1>MONIPEE HOTEL</h1>
+    <div class="divider"></div>
+    <p>Ahansonyewodea, Obuasi. A private reserve of silence and discretion. Home to Obuasi's most exquisite pool and premier event venue.</p>
+    <button class="btn-primary" id="heroOpenModalBtn">BOOK YOUR STAY</button>
+  </div>
+</div>
+
+<!-- GALLERY SECTION - ALL IMAGES FROM YOUR LIST -->
+<section id="gallery">
+  <div class="section-title reveal">The Estate</div>
+  <div class="section-sub reveal">VISUAL CHRONICLES</div>
+  <div class="swiper gallery-swiper">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide gallery-slide"><img src="images/gallery1.jpg" alt="Hotel Facade"></div>
+      <div class="swiper-slide gallery-slide"><img src="images/gallery2.jpg" alt="Luxury Lounge"></div>
+      <div class="swiper-slide gallery-slide"><img src="images/gallery3.jpg" alt="Swimming Pool"></div>
+      <div class="swiper-slide gallery-slide"><img src="images/gallery4.jpg" alt="Executive Suite"></div>
+    </div>
+    <div class="swiper-button-next"></div><div class="swiper-button-prev"></div><div class="swiper-pagination"></div>
+  </div>
+</section>
+
+<!-- POOL SECTION -->
+<section id="pool">
+  <div class="section-title reveal">The Signature Pool</div>
+  <div class="section-sub reveal">OBUASI'S FINEST</div>
+  <div class="pool-highlight reveal">
+    <div class="pool-image">
+      <img src="images/pool.jpeg" alt="Monipée Pool">
+    </div>
+  </div>
+</section>
+
+<!-- EVENTS SECTION - 3 IMAGE GRID COLLAGE -->
+<section id="events">
+  <div class="section-title reveal">Grand Celebrations</div>
+  <div class="section-sub reveal">PRIVATE AND CORPORATE EVENTS</div>
+  
+  <div class="events-grid reveal">
+    <div class="event-grid-item">
+      <img src="images/event1.jpg" alt="Wedding Setup">
+      <div class="event-overlay"><span>Weddings and Receptions</span></div>
+    </div>
+    <div class="event-grid-item">
+      <img src="images/event2.jpg" alt="Corporate Event">
+      <div class="event-overlay"><span>Corporate Galas</span></div>
+    </div>
+    <div class="event-grid-item">
+      <img src="images/event3.jpg" alt="Private Celebration">
+      <div class="event-overlay"><span>Private Celebrations</span></div>
+    </div>
+  </div>
+  
+  <div class="events-content reveal">
+    <h3>The Grand Pavilion</h3>
+    <p>500+ sqm event space for weddings, galas, and receptions. Crystal chandeliers, indoor-outdoor flow, and dedicated event planning team.</p>
+    <div class="events-features">
+      <div class="event-feature"><i class="fas fa-users"></i><span>500 Guests</span></div>
+      <div class="event-feature"><i class="fas fa-champagne-glasses"></i><span>Catering</span></div>
+      <div class="event-feature"><i class="fas fa-microphone-alt"></i><span>AV Equipment</span></div>
+      <div class="event-feature"><i class="fas fa-parking"></i><span>Ample Parking</span></div>
+      <div class="event-feature"><i class="fas fa-concierge-bell"></i><span>Event Planning</span></div>
+    </div>
+    <button class="btn-event" id="eventBookingBtn">BOOK EVENT SPACE</button>
+  </div>
+</section>
+
+<!-- ROOMS SECTION -->
+<section id="rooms">
+  <div class="section-title reveal">Chambers</div>
+  <div class="section-sub reveal">WHERE STILLNESS RESIDES</div>
+  <div class="rooms-stack">
+    <!-- Presidential Suite -->
+    <div class="luxury-room-card reveal">
+      <div class="room-stack-image"><img src="images/presidential.jpeg" alt="Presidential Suite"></div>
+      <div class="room-stack-details">
+        <h3 class="room-stack-title">Presidential Suite</h3>
+        <div class="room-stack-specs"><i class="fas fa-vector-square"></i> 120m² · Ocean View</div>
+        <div class="room-stack-feature"><i class="fas fa-crown"></i> Private Lounge · Butler Service</div>
+        <div class="room-stack-price">From GHS 3,500 <span>/ night</span></div>
+        <button class="btn-stack-book room-book-btn" data-room="Presidential Suite">Reserve Suite</button>
+      </div>
+    </div>
+    <!-- Executive Suite -->
+    <div class="luxury-room-card reveal">
+      <div class="room-stack-image"><img src="images/executive.jpeg" alt="Executive Suite"></div>
+      <div class="room-stack-details">
+        <h3 class="room-stack-title">Executive Suite</h3>
+        <div class="room-stack-specs"><i class="fas fa-vector-square"></i> 70m² · City View</div>
+        <div class="room-stack-feature"><i class="fas fa-briefcase"></i> Workspace · Espresso Bar</div>
+        <div class="room-stack-price">From GHS 1,800 <span>/ night</span></div>
+        <button class="btn-stack-book room-book-btn" data-room="Executive Suite">Reserve Suite</button>
+      </div>
+    </div>
+    <!-- Deluxe Suite -->
+    <div class="luxury-room-card reveal">
+      <div class="room-stack-image"><img src="images/deluxe.jpeg" alt="Deluxe Suite"></div>
+      <div class="room-stack-details">
+        <h3 class="room-stack-title">Deluxe Suite</h3>
+        <div class="room-stack-specs"><i class="fas fa-vector-square"></i> 55m² · Garden View</div>
+        <div class="room-stack-feature"><i class="fas fa-hot-tub"></i> Deep Soaking Tub · Breakfast</div>
+        <div class="room-stack-price">From GHS 1,200 <span>/ night</span></div>
+        <button class="btn-stack-book room-book-btn" data-room="Deluxe Suite">Reserve Suite</button>
+      </div>
+    </div>
+    <!-- Signature Room -->
+    <div class="luxury-room-card reveal">
+      <div class="room-stack-image"><img src="images/signature.jpeg" alt="Signature Room"></div>
+      <div class="room-stack-details">
+        <h3 class="room-stack-title">Signature Room</h3>
+        <div class="room-stack-specs"><i class="fas fa-vector-square"></i> 42m² · Courtyard View</div>
+        <div class="room-stack-feature"><i class="fas fa-shower"></i> Rain Shower · Egyptian Cotton</div>
+        <div class="room-stack-price">From GHS 850 <span>/ night</span></div>
+        <button class="btn-stack-book room-book-btn" data-room="Signature Room">Reserve Suite</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AMENITIES - POLAROID SLIDER -->
+<section id="amenities">
+  <div class="section-title reveal">Silent Luxuries</div>
+  <div class="section-sub reveal">POLAROID MEMORIES</div>
+  <div class="swiper amenities-single-slider">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide"><div class="polaroid-single"><div class="polaroid-single-img"><img src="images/gourment dining.jpeg" alt="Gourmet Dining"></div><div class="polaroid-single-caption"><h4>Gourmet Dining</h4><p>Michelin Curated</p></div></div></div>
+      <div class="swiper-slide"><div class="polaroid-single"><div class="polaroid-single-img"><img src="images/butler.jpg" alt="Butler Service"></div><div class="polaroid-single-caption"><h4>24H Butler</h4><p>Flawless Service</p></div></div></div>
+      <div class="swiper-slide"><div class="polaroid-single"><div class="polaroid-single-img"><img src="images/garden.jpeg" alt="Secret Gardens"></div><div class="polaroid-single-caption"><h4>Secret Gardens</h4><p>Native Flora</p></div></div></div>
+      <div class="swiper-slide"><div class="polaroid-single"><div class="polaroid-single-img"><img src="images/infinity pool.jpeg" alt="Infinity Pool"></div><div class="polaroid-single-caption"><h4>Infinity Pool</h4><p>Aqua Sanctuary</p></div></div></div>
+      <div class="swiper-slide"><div class="polaroid-single"><div class="polaroid-single-img"><img src="images/event1.jpg" alt="Wedding Pavilion"></div><div class="polaroid-single-caption"><h4>Wedding Pavilion</h4><p>Eternal Moments</p></div></div></div>
+      <div class="swiper-slide"><div class="polaroid-single"><div class="polaroid-single-img"><img src="images/library.jpeg" alt="Private Library"></div><div class="polaroid-single-caption"><h4>Private Library</h4><p>Silent Reading</p></div></div></div>
+    </div>
+    <div class="swiper-pagination"></div>
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+  </div>
+</section>
+
+<!-- REVIEW SECTION -->
+<section id="review">
+  <div class="section-title reveal">Whispers</div>
+  <div class="section-sub reveal">VERIFIED GUESTS</div>
+  <div class="review-card reveal"><div class="stars">★★★★★</div><div class="review-text">"The swimming pool is breathtaking — the best in Obuasi. Monipee Hotel offers serenity, elegance, and impeccable service. A true hidden gem."</div><div class="reviewer" style="color:#C6A43F; margin-top:0.4rem;">— Christopher Manu</div></div>
+  <div style="text-align:center; font-size:0.7rem;">98% recommendation rate · 216 verified reviews · 4.0 rating</div>
+</section>
+
+<!-- LOCATION SECTION -->
+<section id="location">
+  <div class="section-title reveal">Arrival</div>
+  <div class="section-sub reveal">BEHIND MONIPEE GOLD, OBUASI</div>
+  <div class="location-box reveal">
+    <div class="map-image">
+      <img src="images/map.png" alt="Location Map">
+    </div>
+    <div class="address">
+      <h3>A Hidden Throne</h3>
+      <p>Directly behind Monipee Gold — private transfers available upon request.</p>
+      <button class="btn-outline" onclick="alert('Directions sent to your email.')">GET DIRECTIONS</button>
+    </div>
+  </div>
+</section>
+
+<!-- ROOM BOOKING MODAL -->
+<div class="booking-modal" id="bookingModal">
+  <div class="modal-content"><div class="modal-header"><span class="close-modal" id="closeModalBtn">&times;</span><h3>Complete Your Booking</h3></div>
+    <form class="booking-form" id="bookingForm">
+      <div class="form-section"><div class="form-section-title">Stay Details</div><div class="form-grid">
+        <div class="form-group"><label>Check-in Date</label><input type="date" id="checkin" required></div>
+        <div class="form-group"><label>Check-out Date</label><input type="date" id="checkout" required></div>
+        <div class="form-group"><label>Number of Adults</label><select id="adults"><option>1</option><option selected>2</option><option>3</option><option>4</option></select></div>
+        <div class="form-group"><label>Room Type</label><select id="roomType"><option>Presidential Suite</option><option>Executive Suite</option><option>Deluxe Suite</option><option>Signature Room</option></select></div>
+      </div></div>
+      <div class="form-section"><div class="form-section-title">Guest Information</div><div class="form-grid">
+        <div class="form-group"><label>Full Name</label><input type="text" id="fullname" required></div>
+        <div class="form-group"><label>Email Address</label><input type="email" id="email" required></div>
+        <div class="form-group"><label>Phone Number</label><input type="tel" id="phone" required></div>
+      </div></div>
+      <div class="booking-summary" id="bookingSummary"></div>
+      <button type="submit" class="submit-btn">CONFIRM BOOKING</button>
+    </form>
+  </div>
+</div>
+
+<!-- EVENT BOOKING MODAL -->
+<div class="event-modal" id="eventModal">
+  <div class="modal-content"><div class="modal-header"><span class="close-modal" id="closeEventModalBtn">&times;</span><h3>Event Space Inquiry</h3></div>
+    <form class="event-form" id="eventForm">
+      <div class="form-section"><div class="form-section-title">Event Details</div><div class="form-grid">
+        <div class="form-group"><label>Event Type</label><select id="eventType" required><option value="">Select Event Type</option><option value="Wedding">Wedding Reception</option><option value="Corporate Event">Corporate Event / Gala</option><option value="Private Party">Private Party / Celebration</option><option value="Conference">Conference / Seminar</option><option value="Other">Other</option></select></div>
+        <div class="form-group"><label>Event Date</label><input type="date" id="eventDate" required></div>
+        <div class="form-group"><label>Start Time</label><input type="time" id="startTime" required></div>
+        <div class="form-group"><label>End Time</label><input type="time" id="endTime" required></div>
+        <div class="form-group"><label>Number of Guests</label><input type="number" id="guestCount" placeholder="Example: 150" min="1" max="500" required></div>
+      </div></div>
+      <div class="form-section"><div class="form-section-title">Customer Details</div><div class="form-grid">
+        <div class="form-group"><label>Full Name</label><input type="text" id="eventName" required></div>
+        <div class="form-group"><label>Phone Number</label><input type="tel" id="eventPhone" required></div>
+        <div class="form-group"><label>Email Address</label><input type="email" id="eventEmail" required></div>
+        <div class="form-group"><label>Special Requests</label><textarea id="eventRequests" rows="2" placeholder="Any dietary, decoration, or AV requirements..."></textarea></div>
+      </div></div>
+      <div class="event-summary" id="eventSummary"></div>
+      <button type="submit" class="submit-btn">SUBMIT EVENT INQUIRY</button>
+    </form>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-logo">MONIPEE <span>HOTEL</span></div>
+  <p style="font-size:0.65rem;">Serenity carved in silence. Behind Monipee Gold, Obuasi.</p>
+  <div class="socials"><i class="fab fa-instagram"></i><i class="fab fa-x-twitter"></i><i class="fab fa-facebook-f"></i></div>
+  <p style="font-size:0.55rem; margin-top:0.8rem;">© 2025 MONIPEE HOTEL — Luxury Estate</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+  // Gallery Swiper
+  new Swiper('.gallery-swiper', { loop: true, autoplay: { delay: 5000 }, navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' }, pagination: { el: '.swiper-pagination', clickable: true }, slidesPerView: 1 });
+  
+  // Amenities Slider
+  new Swiper('.amenities-single-slider', {
+    loop: true,
+    autoplay: { delay: 3500, disableOnInteraction: false },
+    slidesPerView: 1,
+    spaceBetween: 20,
+    centeredSlides: true,
+    pagination: { el: '.swiper-pagination', clickable: true },
+    navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' }
+  });
+  
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver(e => e.forEach(entry => entry.isIntersecting && entry.target.classList.add('active')), { threshold: 0.15 });
+  reveals.forEach(el => observer.observe(el));
+  
+  // Hamburger Menu
+  const hamburger = document.getElementById('hamburgerBtn'), mobileMenu = document.getElementById('mobileMenu'), overlay = document.getElementById('overlay'), closeMenuBtn = document.getElementById('closeMenu');
+  function closeMenu() { hamburger.classList.remove('active'); mobileMenu.classList.remove('active'); overlay.classList.remove('active'); document.body.style.overflow = ''; }
+  function openMenu() { hamburger.classList.add('active'); mobileMenu.classList.add('active'); overlay.classList.add('active'); document.body.style.overflow = 'hidden'; }
+  hamburger.addEventListener('click', () => { if (mobileMenu.classList.contains('active')) closeMenu(); else openMenu(); });
+  closeMenuBtn.addEventListener('click', closeMenu); overlay.addEventListener('click', closeMenu);
+  document.querySelectorAll('.mobile-menu a').forEach(link => { link.addEventListener('click', (e) => { const href = link.getAttribute('href'); if (href === '#') { e.preventDefault(); closeMenu(); return; } const target = document.querySelector(href); if (target) { e.preventDefault(); closeMenu(); target.scrollIntoView({ behavior: 'smooth' }); } else closeMenu(); }); });
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => { if (!anchor.closest('.mobile-menu')) { anchor.addEventListener('click', function(e) { const target = document.querySelector(this.getAttribute('href')); if (target && this.getAttribute('href') !== '#') { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); closeMenu(); } }); } });
+  
+  // Room Booking Modal
+  const modal = document.getElementById('bookingModal'), openBtns = document.querySelectorAll('#openModalBtn, #mobileOpenModalBtn, #heroOpenModalBtn'), closeModalBtn = document.getElementById('closeModalBtn'), roomBookBtns = document.querySelectorAll('.room-book-btn');
+  const checkin = document.getElementById('checkin'), checkout = document.getElementById('checkout'), bookingSummary = document.getElementById('bookingSummary'), roomType = document.getElementById('roomType'), adults = document.getElementById('adults');
+  function updateSummary() {
+    const cin = checkin.value, cout = checkout.value, ad = adults.value, rt = roomType.value;
+    if (cin && cout) {
+      const nights = Math.ceil((new Date(cout) - new Date(cin)) / (1000 * 60 * 60 * 24));
+      if (nights > 0) bookingSummary.innerHTML = `<p>${nights} night(s) | ${cin} to ${cout}</p><p>${ad} Adult(s) | ${rt}</p>`;
+      else bookingSummary.innerHTML = '<p>Please select valid dates</p>';
+    } else bookingSummary.innerHTML = '<p>Select your stay dates</p>';
+  }
+  function openModal(room = null) { modal.classList.add('active'); document.body.style.overflow = 'hidden'; if (room) { for (let i = 0; i < roomType.options.length; i++) if (roomType.options[i].value === room) { roomType.selectedIndex = i; break; } } updateSummary(); }
+  function closeModalFunc() { modal.classList.remove('active'); document.body.style.overflow = ''; }
+  openBtns.forEach(btn => btn?.addEventListener('click', (e) => { e.preventDefault(); openModal(); }));
+  roomBookBtns.forEach(btn => btn.addEventListener('click', (e) => { e.preventDefault(); openModal(btn.getAttribute('data-room')); }));
+  closeModalBtn?.addEventListener('click', closeModalFunc); modal?.addEventListener('click', e => { if (e.target === modal) closeModalFunc(); });
+  checkin?.addEventListener('change', updateSummary); checkout?.addEventListener('change', updateSummary);
+  adults?.addEventListener('change', updateSummary); roomType?.addEventListener('change', updateSummary);
+  const today = new Date().toISOString().split('T')[0];
+  if (checkin) { checkin.min = today; checkin.value = today; }
+  if (checkout) { checkout.min = today; checkout.value = today; }
+  updateSummary();
+  document.getElementById('bookingForm')?.addEventListener('submit', (e) => {
+    e.preventDefault(); const full = document.getElementById('fullname')?.value, email = document.getElementById('email')?.value, phone = document.getElementById('phone')?.value || '';
+    const cin = checkin.value, cout = checkout.value, ad = adults.value, rt = roomType.value;
+    if (!full || !email) { alert('Please fill required fields'); return; }
+    const nights = Math.ceil((new Date(cout) - new Date(cin)) / (1000 * 60 * 60 * 24));
+    const subject = `Monipee Booking - ${full}`;
+    const body = `MONIPEE HOTEL BOOKING\nCheck-in: ${cin}\nCheck-out: ${cout}\nNights: ${nights}\nAdults: ${ad}\nRoom: ${rt}\nName: ${full}\nEmail: ${email}\nPhone: ${phone}`;
+    window.location.href = `mailto:williamotoo672@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    alert(`Thank you ${full}! Your request has been sent.`);
+    closeModalFunc();
+  });
+  
+  // Event Booking Modal
+  const eventModal = document.getElementById('eventModal'), eventBookingBtn = document.getElementById('eventBookingBtn'), closeEventModalBtn = document.getElementById('closeEventModalBtn');
+  const eventDate = document.getElementById('eventDate'), eventSummary = document.getElementById('eventSummary');
+  function updateEventSummary() {
+    const type = document.getElementById('eventType')?.value, date = eventDate?.value, start = document.getElementById('startTime')?.value, end = document.getElementById('endTime')?.value, guests = document.getElementById('guestCount')?.value;
+    if (date && type) eventSummary.innerHTML = `<p>${date} | ${start} - ${end}</p><p>${guests || '?'} Guests | ${type}</p>`;
+    else eventSummary.innerHTML = '<p>Fill in event details for summary</p>';
+  }
+  function openEventModal() { eventModal.classList.add('active'); document.body.style.overflow = 'hidden'; updateEventSummary(); }
+  function closeEventModal() { eventModal.classList.remove('active'); document.body.style.overflow = ''; }
+  eventBookingBtn?.addEventListener('click', openEventModal);
+  closeEventModalBtn?.addEventListener('click', closeEventModal);
+  eventModal?.addEventListener('click', e => { if (e.target === eventModal) closeEventModal(); });
+  ['eventType', 'eventDate', 'startTime', 'endTime', 'guestCount'].forEach(id => document.getElementById(id)?.addEventListener('change', updateEventSummary));
+  if (eventDate) { eventDate.min = today; eventDate.value = today; }
+  document.getElementById('eventForm')?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const name = document.getElementById('eventName')?.value, email = document.getElementById('eventEmail')?.value, phone = document.getElementById('eventPhone')?.value;
+    const type = document.getElementById('eventType')?.value, date = eventDate.value, start = document.getElementById('startTime')?.value, end = document.getElementById('endTime')?.value, guests = document.getElementById('guestCount')?.value, requests = document.getElementById('eventRequests')?.value || 'None';
+    if (!name || !email || !phone || !type || !date || !start || !end || !guests) { alert('Please fill all required fields'); return; }
+    const subject = `Monipee Event Inquiry - ${name}`;
+    const body = `MONIPEE HOTEL - EVENT SPACE INQUIRY\n\nEVENT DETAILS\nEvent Type: ${type}\nEvent Date: ${date}\nTime: ${start} - ${end}\nGuests: ${guests}\n\nCUSTOMER DETAILS\nName: ${name}\nEmail: ${email}\nPhone: ${phone}\nSpecial Requests: ${requests}`;
+    window.location.href = `mailto:williamotoo672@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    alert(`Thank you ${name}! Your event inquiry has been sent. Our events team will respond within 24 hours.`);
+    closeEventModal();
+    document.getElementById('eventForm').reset();
+    if (eventDate) eventDate.value = today;
+    updateEventSummary();
+  });
+</script>
+</body>
+</html>
