@@ -140,6 +140,7 @@
     }
     .overlay.active { display: block; }
 
+    /* HERO SECTION - FIXED BACKGROUND ZOOM ISSUE ON MOBILE */
     .hero {
       height: 100vh;
       min-height: 600px;
@@ -149,12 +150,22 @@
       text-align: center;
       position: relative;
       padding: 0 5%;
+    }
+    /* Background image applied via pseudo-element to avoid zoom issues */
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
       background-image: url('images/background.png');
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
+      z-index: 0;
     }
-    .hero::before {
+    .hero::after {
       content: '';
       position: absolute;
       top: 0;
@@ -206,7 +217,7 @@
     .section-title { text-align: center; font-size: 2rem; margin-bottom: 0.3rem; color: #2c2418; }
     .section-sub { text-align: center; color: #C6A43F; letter-spacing: 3px; font-size: 0.55rem; margin-bottom: 1.5rem; text-transform: uppercase; }
 
-    /* GALLERY */
+    /* GALLERY - RESPONSIVE */
     .gallery-swiper { width: 100%; border-radius: 20px; overflow: hidden; }
     .gallery-slide { width: 100%; height: 280px; border-radius: 20px; background: #E8DDCE; display: flex; align-items: center; justify-content: center; color: #7a684c; font-size: 0.8rem; overflow: hidden; }
     .gallery-slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
@@ -292,7 +303,7 @@
     }
     .btn-event:hover { background: #C6A43F; color: #FDF9F2; }
 
-    /* ROOMS */
+    /* ROOMS - RESPONSIVE */
     .rooms-stack { display: flex; flex-direction: column; gap: 2rem; max-width: 100%; margin: 0 auto; }
     .luxury-room-card {
       background: #FCF8F0; border-radius: 28px; overflow: hidden; box-shadow: 0 8px 24px rgba(0,0,0,0.06);
@@ -315,10 +326,10 @@
     }
     .btn-stack-book:hover { background: #C6A43F; color: #FDF9F2; transform: translateX(5px); }
 
-    /* AMENITIES - LARGER SINGLE SLIDER */
+    /* AMENITIES - LARGER SLIDER (INCREASED SIZE) */
     .amenities-single-slider {
       width: 100%;
-      max-width: 600px;
+      max-width: 700px;
       margin: 0 auto;
       overflow: hidden;
       padding: 20px 0;
@@ -329,11 +340,11 @@
     }
     .polaroid-single {
       background: #FEFCF8;
-      padding: 20px 20px 30px 20px;
-      border-radius: 20px;
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+      padding: 25px 25px 35px 25px;
+      border-radius: 24px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
       width: 100%;
-      max-width: 400px;
+      max-width: 480px;
       margin: 0 auto;
       transition: transform 0.3s ease;
     }
@@ -342,25 +353,25 @@
       width: 100%;
       aspect-ratio: 1 / 1;
       overflow: hidden;
-      border-radius: 16px;
+      border-radius: 20px;
       margin-bottom: 20px;
       background: #E8DDCE;
       display: flex;
       align-items: center;
       justify-content: center;
       color: #7a684c;
-      font-size: 0.9rem;
+      font-size: 1rem;
     }
     .polaroid-single-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
     .polaroid-single-caption { text-align: center; }
-    .polaroid-single-caption h4 { font-size: 1.6rem; margin-bottom: 8px; font-family: 'Cormorant Garamond', serif; color: #2c2418; }
-    .polaroid-single-caption p { font-size: 0.7rem; letter-spacing: 2px; color: #C6A43F; text-transform: uppercase; }
+    .polaroid-single-caption h4 { font-size: 1.8rem; margin-bottom: 8px; font-family: 'Cormorant Garamond', serif; color: #2c2418; }
+    .polaroid-single-caption p { font-size: 0.8rem; letter-spacing: 2px; color: #C6A43F; text-transform: uppercase; }
     .amenities-single-slider .swiper-button-next,
     .amenities-single-slider .swiper-button-prev {
       color: #C6A43F;
       background: rgba(0,0,0,0.05);
-      width: 40px;
-      height: 40px;
+      width: 44px;
+      height: 44px;
       border-radius: 50%;
     }
     .amenities-single-slider .swiper-button-next:after,
@@ -402,7 +413,13 @@
     }
     .booking-modal.active, .event-modal.active { display: flex; }
     .modal-content {
-      max-width: 90%; width: 90%; max-height: 85vh; background: #FDF9F2; border-radius: 24px; border: 1px solid #C6A43F; overflow-y: auto;
+      max-width: 90%;
+      width: 90%;
+      max-height: 85vh;
+      background: #FDF9F2;
+      border-radius: 24px;
+      border: 1px solid #C6A43F;
+      overflow-y: auto;
     }
     .modal-header { padding: 0.8rem; text-align: center; border-bottom: 1px solid #E8DDCE; position: relative; }
     .close-modal {
@@ -428,6 +445,7 @@
     .footer-logo span { color: #C6A43F; font-style: normal; }
     .socials i { font-size: 0.9rem; margin: 0 8px; color: #C6A43F; }
 
+    /* ========== RESPONSIVE STYLES ========== */
     @media (min-width: 768px) {
       .hero-content h1 { font-size: 4rem; }
       .section-title { font-size: 2.5rem; }
@@ -439,8 +457,31 @@
       .pool-image { min-height: 400px; }
       .map-image { min-height: 320px; }
       .gallery-slide { height: 400px; }
-      .amenities-single-slider { max-width: 500px; }
-      .polaroid-single { max-width: 450px; }
+      .amenities-single-slider { max-width: 600px; }
+      .polaroid-single { max-width: 550px; }
+      .polaroid-single-caption h4 { font-size: 2rem; }
+    }
+
+    /* Small mobile devices */
+    @media (max-width: 480px) {
+      .hero-content h1 { font-size: 2rem; }
+      .section-title { font-size: 1.6rem; }
+      .room-stack-title { font-size: 1.4rem; }
+      .room-stack-price { font-size: 1.2rem; }
+      .polaroid-single { padding: 15px 15px 25px 15px; }
+      .polaroid-single-caption h4 { font-size: 1.3rem; }
+      .polaroid-single-caption p { font-size: 0.65rem; }
+      .amenities-single-slider .swiper-button-next,
+      .amenities-single-slider .swiper-button-prev {
+        display: none;
+      }
+    }
+
+    /* Tablet styles */
+    @media (min-width: 481px) and (max-width: 768px) {
+      .hero-content h1 { font-size: 3rem; }
+      .polaroid-single-caption h4 { font-size: 1.5rem; }
+      .room-stack-title { font-size: 1.6rem; }
     }
   </style>
 </head>
@@ -474,7 +515,7 @@
   </div>
 </div>
 
-<!-- GALLERY SECTION - ALL IMAGES FROM YOUR LIST -->
+<!-- GALLERY SECTION -->
 <section id="gallery">
   <div class="section-title reveal">The Estate</div>
   <div class="section-sub reveal">VISUAL CHRONICLES</div>
@@ -500,7 +541,7 @@
   </div>
 </section>
 
-<!-- EVENTS SECTION - 3 IMAGE GRID COLLAGE -->
+<!-- EVENTS SECTION -->
 <section id="events">
   <div class="section-title reveal">Grand Celebrations</div>
   <div class="section-sub reveal">PRIVATE AND CORPORATE EVENTS</div>
@@ -586,7 +627,7 @@
   </div>
 </section>
 
-<!-- AMENITIES - POLAROID SLIDER -->
+<!-- AMENITIES - POLAROID SLIDER (INCREASED SIZE) -->
 <section id="amenities">
   <div class="section-title reveal">Silent Luxuries</div>
   <div class="section-sub reveal">POLAROID MEMORIES</div>
@@ -685,7 +726,7 @@
   // Gallery Swiper
   new Swiper('.gallery-swiper', { loop: true, autoplay: { delay: 5000 }, navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' }, pagination: { el: '.swiper-pagination', clickable: true }, slidesPerView: 1 });
   
-  // Amenities Slider
+  // Amenities Slider - Larger Size
   new Swiper('.amenities-single-slider', {
     loop: true,
     autoplay: { delay: 3500, disableOnInteraction: false },
