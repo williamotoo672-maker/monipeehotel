@@ -140,7 +140,7 @@
     }
     .overlay.active { display: block; }
 
-    /* HERO SECTION - FIXED BACKGROUND ZOOM ISSUE ON MOBILE */
+    /* HERO SECTION */
     .hero {
       height: 100vh;
       min-height: 600px;
@@ -216,7 +216,7 @@
     .section-title { text-align: center; font-size: 2rem; margin-bottom: 0.3rem; color: #2c2418; }
     .section-sub { text-align: center; color: #C6A43F; letter-spacing: 3px; font-size: 0.55rem; margin-bottom: 1.5rem; text-transform: uppercase; }
 
-    /* GALLERY - Estate Visuals (Reference size) */
+    /* GALLERY - Estate Visuals */
     .gallery-swiper { 
       width: 100%; 
       border-radius: 20px; 
@@ -345,7 +345,10 @@
     }
     .btn-stack-book:hover { background: #C6A43F; color: #FDF9F2; transform: translateX(5px); }
 
-    /* AMENITIES - SAME SIZE AS ESTATE VISUALS */
+    /* ============================================ */
+    /* AMENITIES - RESTORED TO PREVIOUS LARGER SIZE */
+    /* Matches .gallery-swiper and .gallery-slide  */
+    /* ============================================ */
     .amenities-single-slider {
       width: 100%;
       margin: 0 auto;
@@ -425,7 +428,7 @@
     .stars { letter-spacing: 3px; font-size: 0.8rem; margin-bottom: 0.5rem; color: #C6A43F; }
     .review-text { font-size: 0.8rem; line-height: 1.5; }
 
-    /* LOCATION */
+    /* LOCATION - GET DIRECTIONS BUTTON REMOVED */
     .location-box { display: flex; flex-direction: column; gap: 0.8rem; background: #F5EFE0; border-radius: 24px; overflow: hidden; width: 100%; }
     .map-image { width: 100%; min-height: 240px; background: #E8DDCE; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; color: #7a684c; overflow: hidden; }
     .map-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
@@ -491,6 +494,7 @@
       .pool-image { min-height: 400px; }
       .map-image { min-height: 320px; }
       .gallery-slide { height: 400px; }
+      /* Amenities matches gallery size on desktop */
       .polaroid-single-img { height: 400px; }
     }
 
@@ -501,6 +505,7 @@
       .room-stack-title { font-size: 1.4rem; }
       .room-stack-price { font-size: 1.2rem; }
       .gallery-slide { height: 220px; }
+      /* Amenities matches gallery size on mobile */
       .polaroid-single-img { height: 220px; }
       .amenities-single-slider .swiper-button-next,
       .amenities-single-slider .swiper-button-prev {
@@ -659,7 +664,7 @@
   </div>
 </section>
 
-<!-- AMENITIES SECTION -->
+<!-- AMENITIES SECTION - RESTORED TO PREVIOUS SIZE -->
 <section id="amenities">
   <div class="section-title reveal">Silent Luxuries</div>
   <div class="section-sub reveal">POLAROID MEMORIES</div>
@@ -686,7 +691,7 @@
   <div style="text-align:center; font-size:0.7rem;">98% recommendation rate · 216 verified reviews · 4.0 rating</div>
 </section>
 
-<!-- LOCATION SECTION -->
+<!-- LOCATION SECTION - GET DIRECTIONS BUTTON REMOVED -->
 <section id="location">
   <div class="section-title reveal">Arrival</div>
   <div class="section-sub reveal">BEHIND MONIPEE GOLD, OBUASI</div>
@@ -757,7 +762,7 @@
   // Gallery Swiper
   new Swiper('.gallery-swiper', { loop: true, autoplay: { delay: 5000 }, navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' }, pagination: { el: '.swiper-pagination', clickable: true }, slidesPerView: 1 });
   
-  // Amenities Slider
+  // Amenities Slider - Restored to previous size
   new Swiper('.amenities-single-slider', {
     loop: true,
     autoplay: { delay: 4000, disableOnInteraction: false },
