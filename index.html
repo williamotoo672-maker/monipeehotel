@@ -345,10 +345,7 @@
     }
     .btn-stack-book:hover { background: #C6A43F; color: #FDF9F2; transform: translateX(5px); }
 
-    /* ============================================ */
-    /* AMENITIES - SAME SIZE AS ESTATE VISUALS     */
-    /* Matches .gallery-swiper and .gallery-slide  */
-    /* ============================================ */
+    /* AMENITIES - SAME SIZE AS ESTATE VISUALS */
     .amenities-single-slider {
       width: 100%;
       margin: 0 auto;
@@ -435,10 +432,6 @@
     .address { padding: 1.2rem; text-align: center; }
     .address h3 { font-size: 1.2rem; }
     .address p { font-size: 0.75rem; margin: 0.5rem 0; }
-    .btn-outline {
-      background: transparent; border: 1.5px solid #C6A43F; padding: 0.5rem 1.2rem; font-size: 0.55rem;
-      font-weight: 600; letter-spacing: 1.5px; color: #C6A43F; border-radius: 40px;
-    }
 
     /* MODALS */
     .booking-modal, .event-modal {
@@ -498,7 +491,6 @@
       .pool-image { min-height: 400px; }
       .map-image { min-height: 320px; }
       .gallery-slide { height: 400px; }
-      /* Amenities matches gallery size on desktop */
       .polaroid-single-img { height: 400px; }
     }
 
@@ -509,7 +501,6 @@
       .room-stack-title { font-size: 1.4rem; }
       .room-stack-price { font-size: 1.2rem; }
       .gallery-slide { height: 220px; }
-      /* Amenities matches gallery size on mobile */
       .polaroid-single-img { height: 220px; }
       .amenities-single-slider .swiper-button-next,
       .amenities-single-slider .swiper-button-prev {
@@ -556,7 +547,7 @@
   </div>
 </div>
 
-<!-- GALLERY SECTION - ESTATE VISUALS (Reference size) -->
+<!-- GALLERY SECTION -->
 <section id="gallery">
   <div class="section-title reveal">The Estate</div>
   <div class="section-sub reveal">VISUAL CHRONICLES</div>
@@ -668,7 +659,7 @@
   </div>
 </section>
 
-<!-- AMENITIES SECTION - SAME SIZE AS ESTATE VISUALS -->
+<!-- AMENITIES SECTION -->
 <section id="amenities">
   <div class="section-title reveal">Silent Luxuries</div>
   <div class="section-sub reveal">POLAROID MEMORIES</div>
@@ -706,7 +697,6 @@
     <div class="address">
       <h3>A Hidden Throne</h3>
       <p>Directly behind Monipee Gold — private transfers available upon request.</p>
-      <button class="btn-outline" onclick="alert('Directions sent to your email.')">GET DIRECTIONS</button>
     </div>
   </div>
 </section>
@@ -767,7 +757,7 @@
   // Gallery Swiper
   new Swiper('.gallery-swiper', { loop: true, autoplay: { delay: 5000 }, navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' }, pagination: { el: '.swiper-pagination', clickable: true }, slidesPerView: 1 });
   
-  // Amenities Slider - Same size as Estate Visuals
+  // Amenities Slider
   new Swiper('.amenities-single-slider', {
     loop: true,
     autoplay: { delay: 4000, disableOnInteraction: false },
@@ -814,14 +804,14 @@
   if (checkout) { checkout.min = today; checkout.value = today; }
   updateSummary();
   document.getElementById('bookingForm')?.addEventListener('submit', (e) => {
-    e.preventDefault(); const full = document.getElementById('fullname')?.value, email = document.getElementById('email')?.value, phone = document.getElementById('phone')?.value || '';
+    e.preventDefault();
+    const full = document.getElementById('fullname')?.value, email = document.getElementById('email')?.value, phone = document.getElementById('phone')?.value || '';
     const cin = checkin.value, cout = checkout.value, ad = adults.value, rt = roomType.value;
-    if (!full || !email) { alert('Please fill required fields'); return; }
+    if (!full || !email) { return; }
     const nights = Math.ceil((new Date(cout) - new Date(cin)) / (1000 * 60 * 60 * 24));
     const subject = `Monipee Booking - ${full}`;
     const body = `MONIPEE HOTEL BOOKING\nCheck-in: ${cin}\nCheck-out: ${cout}\nNights: ${nights}\nAdults: ${ad}\nRoom: ${rt}\nName: ${full}\nEmail: ${email}\nPhone: ${phone}`;
     window.location.href = `mailto:williamotoo672@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    alert(`Thank you ${full}! Your request has been sent.`);
     closeModalFunc();
   });
   
@@ -844,11 +834,10 @@
     e.preventDefault();
     const name = document.getElementById('eventName')?.value, email = document.getElementById('eventEmail')?.value, phone = document.getElementById('eventPhone')?.value;
     const type = document.getElementById('eventType')?.value, date = eventDate.value, start = document.getElementById('startTime')?.value, end = document.getElementById('endTime')?.value, guests = document.getElementById('guestCount')?.value, requests = document.getElementById('eventRequests')?.value || 'None';
-    if (!name || !email || !phone || !type || !date || !start || !end || !guests) { alert('Please fill all required fields'); return; }
+    if (!name || !email || !phone || !type || !date || !start || !end || !guests) { return; }
     const subject = `Monipee Event Inquiry - ${name}`;
     const body = `MONIPEE HOTEL - EVENT SPACE INQUIRY\n\nEVENT DETAILS\nEvent Type: ${type}\nEvent Date: ${date}\nTime: ${start} - ${end}\nGuests: ${guests}\n\nCUSTOMER DETAILS\nName: ${name}\nEmail: ${email}\nPhone: ${phone}\nSpecial Requests: ${requests}`;
     window.location.href = `mailto:williamotoo672@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    alert(`Thank you ${name}! Your event inquiry has been sent. Our events team will respond within 24 hours.`);
     closeEventModal();
     document.getElementById('eventForm').reset();
     if (eventDate) eventDate.value = today;
